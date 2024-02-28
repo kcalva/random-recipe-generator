@@ -1,0 +1,11 @@
+<h1>Random Recipe</h1>
+  <h2>Title: <%= @recipe[:title] %></h2>
+  <img src="<%= @recipe[:image] %>" alt="Recipe Image">
+  <h3>Ingredients:</h3>
+  <ul>
+    <% @recipe[:ingredients].each do |ingredient| %>
+      <li><%= ingredient %></li>
+    <% end %>
+  </ul>
+  <h3>Instructions:</h3>
+  <p><%= @recipe[:instructions] %></p>
