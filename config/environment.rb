@@ -2,7 +2,7 @@ require "./app"
 
 configure do
   # GitHub Pages and Render deployment
-  set(:public_folder, "./")
+  # set(:public_folder, "./")
 end
 
 configure :development do
