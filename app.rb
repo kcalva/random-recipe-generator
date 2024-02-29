@@ -14,20 +14,28 @@ class RandomRecipeGenerator
   def get_random_recipe
     uri = URI("#{API_BASE_URL}?apiKey=#{@api_key}")
     response = HTTP.get(uri)
-    parse_recipe(JSON.parse(response))
+    if response.code == 200
+      parse_recipe(JSON.parse(response))
+    else
+      return {error: "Failed to fetch recipe. Status code: #{response.code}"}
+    end
   end
 
   private
 
   def parse_recipe(response)
     recipe = response['recipes'].first
-    ingredients = recipe['extendedIngredients'].map { |ingredient| ingredient['original'] }
-    {
-      title: recipe['title'],
-      ingredients: ingredients,
-      instructions: recipe['instructions'],
-      image: recipe['image']
-    }
+    if recipe.nil?
+      return {error: "No recipe found"}
+    else
+      ingredients = recipe['extendedIngredients'].map { |ingredient| ingredient['original'] }
+      return {
+        title: recipe['title'],
+        ingredients: ingredients,
+        instructions: recipe['instructions'],
+        image: recipe['image']
+      }
+    end
   end
 end
 

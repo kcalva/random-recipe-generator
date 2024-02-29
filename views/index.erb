@@ -1,6 +1,9 @@
-<h1>Random Recipe</h1>
-  <h2>Title: <%= @recipe[:title] %></h2>
-  <img src="<%= @recipe[:image] %>" alt="Recipe Image">
+<div class="recipe">
+  <h1>Random Recipe Generator</h1>
+  <div style="display:flex;flex-direction:column;align-items:center;">
+    <img src="<%=@recipe[:image]%>" alt="Recipe Image">
+    <h2><%= @recipe[:title]%></h2>
+  </div>    
   <h3>Ingredients:</h3>
   <ul>
     <% @recipe[:ingredients].each do |ingredient| %>
@@ -9,3 +12,5 @@
   </ul>
   <h3>Instructions:</h3>
   <p><%= @recipe[:instructions] %></p>
+  <button onclick=window.location.reload()>Generate New Recipe</button>
+</div>
